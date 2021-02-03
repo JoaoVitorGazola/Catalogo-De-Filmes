@@ -23,11 +23,25 @@ export class TmdbController {
     public async imagemFilme(@Param('id') id: number){
         if(!id)
             throw new BadRequestException;
-        return this.tmdbService.imagemFilme(id);
+        return await this.tmdbService.imagemFilme(id);
     }
 
     @Get('generoDisponiveis')
     public async generoDisponiveis(){
-        return this.tmdbService.generoDisponiveis();
+        return await this.tmdbService.generoDisponiveis();
+    }
+
+    @Post('filmesPorTermo')
+    public async filmesPorTermo(@Body('termo') termo: string){
+        if(!termo)
+            throw new BadRequestException("Envie um termo para buscar")
+        return await this.tmdbService.filmesPorTermo(termo);
+    }
+
+    @Get('filmesPorGenero/:id')
+    public async filmesPorGenero(@Param('id') id: string){
+        if(!id)
+            throw new BadRequestException("Envie um id de genero para buscar")
+        return await this.tmdbService.filmesPorGenero(id);
     }
 }
