@@ -1,0 +1,38 @@
+# BACK-END
+# compiled output
+/catalogo-filmes-back/dist
+/catalogo-filmes-back/node_modules
+
+# Logs
+/catalogo-filmes-back/logs
+/catalogo-filmes-back/*.log
+/catalogo-filmes-back/npm-debug.log*
+/catalogo-filmes-back/yarn-debug.log*
+/catalogo-filmes-back/yarn-error.log*
+/catalogo-filmes-back/lerna-debug.log*
+
+# OS
+/catalogo-filmes-back/.DS_Store
+
+# Tests
+/catalogo-filmes-back/coverage
+/catalogo-filmes-back/.nyc_output
+
+# IDEs and editors
+/catalogo-filmes-back/.idea
+/catalogo-filmes-back/.project
+/catalogo-filmes-back/.classpath
+/catalogo-filmes-back/.c9/
+/catalogo-filmes-back/*.launch
+/catalogo-filmes-back/.settings/
+/catalogo-filmes-back/*.sublime-workspace
+
+# IDE - VSCode
+/catalogo-filmes-back/.vscode/*
+/catalogo-filmes-back/!.vscode/settings.json
+/catalogo-filmes-back/!.vscode/tasks.json
+/catalogo-filmes-back/!.vscode/launch.json
+/catalogo-filmes-back/!.vscode/extensions.json
+
+# Enviroment variables
+/catalogo-filmes-back/.env
