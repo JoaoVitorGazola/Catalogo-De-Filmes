@@ -36,3 +36,49 @@
 
 # Enviroment variables
 /catalogo-filmes-back/.env
+
+#FRONT-END
+# compiled output
+/catalogo-filmes-front/dist
+/catalogo-filmes-front/tmp
+/catalogo-filmes-front/out-tsc
+# Only exists if Bazel was run
+/catalogo-filmes-front/bazel-out
+
+# dependencies
+/catalogo-filmes-front/node_modules
+
+# profiling files
+/catalogo-filmes-front/chrome-profiler-events*.json
+/catalogo-filmes-front/speed-measure-plugin*.json
+
+# IDEs and editors
+/catalogo-filmes-front/.idea
+/catalogo-filmes-front/.project
+/catalogo-filmes-front/.classpath
+/catalogo-filmes-front/.c9/
+/catalogo-filmes-front/*.launch
+/catalogo-filmes-front/.settings/
+/catalogo-filmes-front/*.sublime-workspace
+
+# IDE - VSCode
+/catalogo-filmes-front/.vscode/*
+/catalogo-filmes-front/!.vscode/settings.json
+/catalogo-filmes-front/!.vscode/tasks.json
+/catalogo-filmes-front/!.vscode/launch.json
+/catalogo-filmes-front/!.vscode/extensions.json
+/catalogo-filmes-front/.history/*
+
+# misc
+/catalogo-filmes-front/.sass-cache
+/catalogo-filmes-front/connect.lock
+/catalogo-filmes-front/coverage
+/catalogo-filmes-front/libpeerconnection.log
+/catalogo-filmes-front/npm-debug.log
+/catalogo-filmes-front/yarn-error.log
+/catalogo-filmes-front/testem.log
+/catalogo-filmes-front/typings
+
+# System Files
+/catalogo-filmes-front/.DS_Store
+/catalogo-filmes-front/Thumbs.db
