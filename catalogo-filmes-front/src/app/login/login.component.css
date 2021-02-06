@@ -1,0 +1,31 @@
+.sidenav {
+    height: 100%;
+    background-color: #000;
+    overflow-x: hidden;
+    width: 40%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.main {
+    padding: 0px 10px;
+    margin-left: 40%; 
+}
+
+.login-main-text{
+    padding-top: 40vh;
+    padding-left: 20%;
+    color: #fff;
+    font-size: larger;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+    font-size: larger;
+}
+
+.login-form{
+    padding-top: 60%;
+}
