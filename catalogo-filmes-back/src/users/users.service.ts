@@ -1,28 +1,37 @@
-import { Injectable } from '@nestjs/common';
-
-export type User = {
-    userId: number,
-    email: string,
-    password: string
-};
+import { ConflictException, Inject, Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { User } from './users.entity';
+const bcrypt = require('bcrypt');
 
 @Injectable()
 export class UsersService {
-  private readonly users = [
-    {
-      userId: 1,
-      email: 'admin@admin.com',
-      password: '$2b$10$uAnjxd6yJWYkr28DliJkDuJZSkRDgSwvKox5f85cSV2CjHswqcpoe',
-    },
-    {
-      userId: 2,
-      email: 'teste@teste.com',
-      password: '$2b$10$FFCUfIQHOpuTah65OW3N9.q.0uoHNx9UjPtAvSVKUyqao2FPAu/lW',
-    },
-  ];
+  constructor(
+    @Inject('USER_REPOSITORY')
+    private userRepository: Repository<User>,
+  ) { }
 
-  async findOne(email: string): Promise<User | undefined> {
-    return this.users.find(user => user.email === email);
+  public async findAll(): Promise<User[]> {
+    return this.userRepository.find();
   }
-  
+
+  public async findOne(email: string): Promise<User | undefined> {
+    return await this.userRepository.findOne({
+      where: {
+        email: email
+      }
+    });
+  }
+
+  public async newUser(newUser: User) {
+    var user = await this.findOne(newUser.email);
+    if (user)
+      throw new ConflictException("Usuário já cadastrado");
+    var userFormatado = {
+      email: newUser.email,
+      password: await bcrypt.hash(newUser.password, Number(process.env.BCRYPT_ROUNDS))
+    }
+    user = this.userRepository.create(userFormatado);
+    return await this.userRepository.save(user);
+  }
+
 }

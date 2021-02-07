@@ -4,10 +4,11 @@ import { AppService } from './app.service';
 import { TmdbModule } from './tmdb/tmdb.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { DatabaseModule } from './database/database.module';
 require('dotenv').config();
 
 @Module({
-  imports: [TmdbModule, AuthModule, UsersModule],
+  imports: [TmdbModule, AuthModule, UsersModule, DatabaseModule],
   controllers: [AppController],
   providers: [AppService],
 })

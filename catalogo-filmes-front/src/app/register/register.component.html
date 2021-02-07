@@ -1,7 +1,7 @@
 <div class="sidenav">
     <div class="login-main-text">
         <h2>Bem vindo ao<br> Catálogo de filmes</h2>
-        <p>Ainda não tem cadastro? <a href="/register">Cadastre-se aqui</a></p>
+        <p>Já tem cadastro? <a href="/login">Entrar</a></p>
     </div>
 </div>
 
@@ -10,7 +10,7 @@
         <div class="login-form">
             <mat-card class="float-left">
                 <mat-tab-group>
-                    <mat-tab label="Entre com sua conta">
+                    <mat-tab label="Digite seus dados">
                         <br>
                         <mat-card-content>
                             <mat-form-field appearance="outline" style="width: 100%;">
@@ -21,14 +21,18 @@
                                 <mat-label>Senha</mat-label>
                                 <input matInput type="password"  [(ngModel)]="password">
                             </mat-form-field>
-                            <button class="btn btn-dark float-right" (click)="login()">Entrar</button>
+                            <mat-form-field appearance="outline" style="width: 100%;">
+                                <mat-label>Confirme a senha</mat-label>
+                                <input matInput type="password"  [(ngModel)]="passwordConfirmation">
+                            </mat-form-field>
+                            <button class="btn btn-dark float-right" (click)="register()">Cadastrar</button>
                             <br>
                             <br>
                             <br>
                             <div *ngIf="erro" class="alert alert-danger mt-3 mb-0">{{erro}}</div>
                         </mat-card-content>
                     </mat-tab>
-                    <mat-tab label="Entre com sua rede social">
+                    <mat-tab label="Ou cadastre-se com sua rede social">
                         <br>
                         <mat-card-content>
                             <button class="btn btn-lg btn-primary">Entre com Facebook</button>

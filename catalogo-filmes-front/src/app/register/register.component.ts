@@ -3,47 +3,58 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
-import { UserService } from '../services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   email: string;
   password: string;
-  erro = '';
-
+  passwordConfirmation: string;
+  erro: string;
+  
   constructor(
     private authservice: AuthService,
-    private userService: UserService,
     private spinner: NgxSpinnerService,
     private router: Router,
-  ) { }
+    private snackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
   }
 
-  public login(){
+  public register(){
     if(!this.email){
-      this.erro = "Insira o e-mail";
+      this.erro = "Insira um e-mail";
       return;
     }
     if(!this.password){
-      this.erro = "Insira a senha";
+      this.erro = "Insira uma senha";
+      return;
+    }
+    if(!this.passwordConfirmation){
+      this.erro = "Confirme a senha";
+      return;
+    }
+    if(this.password != this.passwordConfirmation){
+      this.erro = "As senhas não são iguais";
       return;
     }
     this.spinner.show();
     var newUser: User = new User();
     newUser.email = this.email;
     newUser.password = this.password;
-    this.authservice.login(newUser).subscribe(
+    this.authservice.register(newUser).subscribe(
         data => {
           this.erro = null;
-          this.userService.setUser(data);
           this.spinner.hide();
-          this.router.navigate(['/selecionarPerfil']);
+          this.snackBar.open("Conta criada com sucesso", "X", {
+            duration: 3000,
+          });
+          this.router.navigate(['/login']);
         },
         err => {
           this.erro = err.error.message;
