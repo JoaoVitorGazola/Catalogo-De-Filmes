@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Perfil } from 'src/perfis/perfil.entity';
+import { Entity, Column, OneToMany} from 'typeorm';
 import { Base } from '../database/base.entity';
 
 @Entity()
@@ -21,4 +22,6 @@ export class User extends Base {
     })
     facebook_id: string;
   
+    @OneToMany(type => Perfil, perfil => perfil.user)
+    perfis: Perfil[];
 }

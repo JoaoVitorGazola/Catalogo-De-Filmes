@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpHeaders } from '@angular/common/http'
 import { StorageService } from './storage.service';
 import { User } from '../models/user.model';
 import { RoutingService } from './routing.service';
+import { Perfil } from '../models/perfil.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,6 @@ import { RoutingService } from './routing.service';
 export class UserService {
 
   constructor(
-    private http: HttpClient,
     private router: RoutingService,
     private storageService: StorageService
   ) { }
@@ -29,8 +29,8 @@ export class UserService {
     this.router.navigateTo("");
   }
 
-  selecionarPerfil(id: number){
-    this.storageService.salvarItem("perfilSelecionado", id);
+  selecionarPerfil(perfil: Perfil){
+    this.storageService.salvarItem("perfilSelecionado", perfil);
   }
 
   perfilSelecionado(){
@@ -47,12 +47,11 @@ export class UserService {
     let header = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${this.getUser().token.accessToken}`,
-        user: JSON.stringify(user.userRO),
-        token: JSON.stringify(user.token)
+        "Authorization": `Bearer ${this.getUser().access_token}`,
+        user: JSON.stringify(user),
+        token: JSON.stringify(user.access_token)
       })
     };
-
     return header;
   }
 }

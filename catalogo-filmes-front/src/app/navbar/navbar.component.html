@@ -1,0 +1,28 @@
+<mat-toolbar style="color: white;">
+    <span class="material-icons" style="margin-left: 0.5%; margin-right: 0.5%;">
+        movie
+    </span>
+    <span>Catálogo de filmes</span>
+    <span class="spacer"></span>
+
+    <mat-form-field appearance="standard" *ngIf="perfil">
+        <input matInput type="text" placeholder="Busque aqui seu filme">
+        <button mat-icon-button>
+            <span class="material-icons" style="font-size: 36px;">
+                search
+            </span>
+        </button>
+    </mat-form-field>
+    <button mat-button [matMenuTriggerFor]="accountActions" style="font-size: large;">
+        <span class="material-icons" style="font-size: 36px;">
+            account_box
+        </span>
+        {{perfil?.nome || email}}
+    </button>
+    <mat-menu #accountActions="matMenu">
+        <button mat-menu-item (click)="selecionarPerfil()">Selecionar perfil</button>
+        <button mat-menu-item (click)="logout()">Sair</button>
+    </mat-menu>
+</mat-toolbar>
+
+<ngx-spinner bdColor="rgba(255,255,255,0.8)" size="large" color="#000000" type="fire" [fullScreen]="true"></ngx-spinner>

@@ -1,1 +1,59 @@
-<p>selecao-de-perfil works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+    <h1 style="font-size:32px; color:black; margin-top: 5%; margin-left: 8%;">Quem está acessando hoje?</h1>
+    <mat-grid-list cols="12" rowHeight="100px" style="margin-top: 15%; margin-left: 5%;">
+        <mat-grid-tile *ngIf="perfis[0]" style="border: 1px solid #ccc!important; border-radius: 16px;" [colspan]="3"
+            [rowspan]="2" [style.background]="'lightgreen'">
+            <button mat-button style="width: 100%; height: 100%;" (click)="selecionarPerfil(0)">
+                <h2>{{perfis[0].nome}}
+                </h2>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="perfis[1]" style="border: 1px solid #ccc!important; border-radius: 16px;" [colspan]="3"
+            [rowspan]="2" [style.background]="'lightyellow'">
+            <button mat-button style="width: 100%; height: 100%;" (click)="selecionarPerfil(1)">
+                <h2>{{perfis[1].nome}}</h2>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="perfis[2]" style="border: 1px solid #ccc!important; border-radius: 16px;" [colspan]="3"
+            [rowspan]="2" [style.background]="'lightblue'">
+            <button mat-button style="width: 100%; height: 100%;" (click)="selecionarPerfil(2)">
+                <h2>{{perfis[2].nome}}</h2>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="perfis[3]" style="border: 1px solid #ccc!important; border-radius: 16px;" [colspan]="3"
+            [rowspan]="2" [style.background]="'lightpink'">
+            <button mat-button style="width: 100%; height: 100%;" (click)="selecionarPerfil(3)">
+                <h2>{{perfis[3].nome}}</h2>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="perfis.length < 4" style="border: 1px solid #ccc!important; border-radius: 16px;"
+            [colspan]="3" [rowspan]="2" [style.background]="'lightgray'">
+            <button *ngIf="!criandoPerfil" mat-button style="width: 100%; height: 100%;" (click)="criandoPerfil = true">
+                <span class="material-icons">
+                    add_circle_outline
+                </span>
+                <h2>Criar perfil</h2>
+            </button>
+            <div *ngIf="criandoPerfil">
+                <mat-form-field style="width: 90%;">
+                    <mat-label>Qual o nome?</mat-label>
+                    <input matInput [(ngModel)]="nomeNovoPerfil" (keyup.enter)="criarNovoPerfil()">
+                </mat-form-field>
+                <br>
+                <button mat-icon-button (click)="criandoPerfil = false">
+                    <span class="material-icons">
+                        clear
+                    </span>
+                </button>
+                <button mat-icon-button style="float: right;" (click)="criarNovoPerfil()">
+                    <span class="material-icons">
+                        checked
+                    </span>
+                </button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+
+<ngx-spinner bdColor="rgba(255,255,255,0.8)" size="large" color="#000000" type="fire" [fullScreen]="true"></ngx-spinner>

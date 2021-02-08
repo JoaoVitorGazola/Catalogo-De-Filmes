@@ -22,6 +22,14 @@ export class UsersService {
     });
   }
 
+  public async findById(id: number): Promise<User | undefined> {
+    return await this.userRepository.findOne({
+      where: {
+        id: id
+      }
+    });
+  }
+
   public async newUser(newUser: User) {
     var user = await this.findOne(newUser.email);
     if (user)
