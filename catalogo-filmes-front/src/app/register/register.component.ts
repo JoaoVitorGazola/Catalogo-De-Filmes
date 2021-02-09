@@ -62,4 +62,7 @@ export class RegisterComponent implements OnInit {
         });
   }
 
+  public alertar(mensagem: string){
+    alert(mensagem);
+  }
 }
