@@ -10,8 +10,9 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  email: string ='';
-  perfil: Perfil
+  email: string = '';
+  perfil: Perfil;
+  termo: string;
   constructor(
     private userService: UserService,
     private authService: AuthService,
@@ -24,11 +25,29 @@ export class NavbarComponent implements OnInit {
     this.email = this.userService.getUser().email;
   }
 
-  public logout(){
+  public logout() {
     this.userService.logout()
   }
 
-  public selecionarPerfil(){
+  public selecionarPerfil() {
     this.router.navigate(['/selecionarPerfil']);
+  }
+
+  public irParaHome() {
+    this.router.navigate(['/home']);
+  }
+
+  public buscarTermo() {
+    this.router.navigate(['.']).then(res => {
+      this.router.navigate(['/buscar/' + this.termo]);
+    });
+  }
+
+  public filmesParaAssistir() {
+    this.router.navigate(['/filmesParaAssistir']);
+  }
+
+  public filmesAssistidos() {
+    this.router.navigate(['/filmesAssistidos']);
   }
 }

@@ -1,0 +1,7 @@
+.grid {
+    margin-top: 5%;
+    margin-left: 28%;
+  }
+  ::ng-deep .mat-grid-tile .mat-figure {
+    align-items: start !important;
+  }

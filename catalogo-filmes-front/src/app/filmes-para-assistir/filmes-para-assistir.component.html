@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+
+<mat-selection-list [multiple]="false">
+    <h2 *ngIf="filmes?.length <= 0" class="col-md-8" style="margin-left: 17%;">Nada Aqui!</h2>
+    <mat-list-option *ngFor="let filme of filmesPaginados" class="col-md-8" style="margin-left: 17%;"
+        (click)="infoFilme(filme)">
+        <img matListAvatar *ngIf="filme?.poster_path" [src]="'http://image.tmdb.org/t/p/w500/' + filme?.poster_path"
+            [alt]="'Poster do filme ' + filme.title">
+        <h3 matLine> {{filme.title || filme.original_title}} </h3>
+        <p matLine>
+            <span> {{filme.overview}} </span>
+        </p>
+    </mat-list-option>
+</mat-selection-list>
+<mat-paginator *ngIf="filmes?.length > 0" [length]="filmes.length" [pageSize]="20" (page)="paginarBusca($event)">
+</mat-paginator>
+
+<ngx-spinner bdColor="rgba(255,255,255,0.8)" size="large" color="#000000" type="fire" [fullScreen]="true"></ngx-spinner>

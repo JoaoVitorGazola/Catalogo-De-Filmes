@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BuscaDeFilmeComponent } from './busca-de-filme/busca-de-filme.component';
+import { FilmeComponent } from './filme/filme.component';
+import { FilmesAssistidosComponent } from './filmes-assistidos/filmes-assistidos.component';
+import { FilmesParaAssistirComponent } from './filmes-para-assistir/filmes-para-assistir.component';
 import { LoggedGuard } from './guards/logged.guard';
 import { NotLoggedGuard } from './guards/not-logged.guard';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +30,26 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [LoggedGuard]
+  },
+  {
+    path: 'filmesAssistidos',
+    component: FilmesAssistidosComponent,
+    canActivate: [LoggedGuard]
+  },
+  {
+    path: 'filmesParaAssistir',
+    component: FilmesParaAssistirComponent,
+    canActivate: [LoggedGuard]
+  },
+  {
+    path: 'filme/:id',
+    component: FilmeComponent,
+    canActivate: [LoggedGuard]
+  },
+  {
+    path: 'buscar/:termo',
+    component: BuscaDeFilmeComponent,
     canActivate: [LoggedGuard]
   },
   {

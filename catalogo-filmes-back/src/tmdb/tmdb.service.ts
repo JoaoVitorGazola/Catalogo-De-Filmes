@@ -7,25 +7,21 @@ export class TmdbService {
     constructor() { }
 
     public async buscarPorId(id: number) {
-        return await this.movieDb.movieInfo({id: id, language: 'pt-BR'})
-  }
-    public async maisBemAvaliados(){
-        return await this.movieDb.movieTopRated({language: 'pt-BR'});
+        return await this.movieDb.movieInfo({ id: id, language: 'pt-BR' })
     }
-    
-    public async imagemFilme(id: number){
-        return await this.movieDb.movieImages({id: id, language: 'pt-BR'});
+    public async maisBemAvaliados(pagina?: number) {
+        return await this.movieDb.movieTopRated({ language: 'pt-BR', page: pagina || 1 });
     }
 
-    public async generoDisponiveis(){
-        return await this.movieDb.genreMovieList({language: 'pt-BR'});
+    public async generoDisponiveis() {
+        return (await this.movieDb.genreMovieList({ language: 'pt-BR' })).genres;
     }
 
-    public async filmesPorTermo(termo: string){
-        return await this.movieDb.searchMovie({query: termo, language: 'pt-BR'});
+    public async filmesPorTermo(termo: string, pagina?: number) {
+        return await this.movieDb.searchMovie({ query: termo, language: 'pt-BR', page: pagina || 1 });
     }
 
-    public async filmesPorGenero(id: string){
-        return await this.movieDb.movieTopRated({with_genres: id, language: 'pt-BR'});
+    public async filmesPorGenero(id: string, pagina?: number) {
+        return await this.movieDb.movieTopRated({ with_genres: id, language: 'pt-BR', page: pagina || 1 });
     }
 }

@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<mat-grid-list cols="4" rowHeight="150px" class="grid" *ngIf="filme">
+    <mat-grid-tile [colspan]="1" [rowspan]="4">
+        <img [src]="'http://image.tmdb.org/t/p/original/' + filme?.poster_path" alt="Poster do filme"
+            style="max-width: 100%; height: auto;">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="4">
+        <mat-card style="min-height: 100%;">
+            <mat-card-header>
+                <mat-card-title>{{filme?.title || filme?.original_title}}</mat-card-title>
+                <mat-card-subtitle>{{filme?.release_date}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{filme?.overview}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions style="align-self: flex-end;">
+                <button mat-button (click)="adicionarAParaAssistir()">Quero Assistir</button>
+                <button mat-button (click)="adicionarAAssistidos()">Já assisti</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<ngx-spinner bdColor="rgba(255,255,255,0.8)" size="large" color="#000000" type="fire" [fullScreen]="true"></ngx-spinner>

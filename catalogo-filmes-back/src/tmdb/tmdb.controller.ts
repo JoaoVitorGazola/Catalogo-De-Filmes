@@ -1,4 +1,5 @@
-import { BadRequestException, Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { TmdbService } from './tmdb.service';
 
 @Controller('tmdb')
@@ -7,41 +8,39 @@ export class TmdbController {
         private readonly tmdbService: TmdbService
     ) { }
 
+    @UseGuards(JwtAuthGuard)
     @Get('buscarPorId/:id')
     public async buscarPorId(@Param('id') id: number) {
-        if(!id)
+        if (!id)
             throw new BadRequestException;
         return await this.tmdbService.buscarPorId(id);
     }
 
-    @Get('maisBemAvaliados')
-    public async maisBemAvaliados(){
-        return await this.tmdbService.maisBemAvaliados();
+    @UseGuards(JwtAuthGuard)
+    @Post('maisBemAvaliados')
+    public async maisBemAvaliados(@Body('pagina') pagina: number) {
+        return await this.tmdbService.maisBemAvaliados(pagina);
     }
 
-    @Get('imagemFilme/:id')
-    public async imagemFilme(@Param('id') id: number){
-        if(!id)
-            throw new BadRequestException;
-        return await this.tmdbService.imagemFilme(id);
-    }
-
+    @UseGuards(JwtAuthGuard)
     @Get('generoDisponiveis')
-    public async generoDisponiveis(){
+    public async generoDisponiveis() {
         return await this.tmdbService.generoDisponiveis();
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post('filmesPorTermo')
-    public async filmesPorTermo(@Body('termo') termo: string){
-        if(!termo)
+    public async filmesPorTermo(@Body('termo') termo: string, @Body('pagina') pagina: number) {
+        if (!termo)
             throw new BadRequestException("Envie um termo para buscar")
-        return await this.tmdbService.filmesPorTermo(termo);
+        return await this.tmdbService.filmesPorTermo(termo, pagina);
     }
 
-    @Get('filmesPorGenero/:id')
-    public async filmesPorGenero(@Param('id') id: string){
-        if(!id)
+    @UseGuards(JwtAuthGuard)
+    @Post('filmesPorGenero/:id')
+    public async filmesPorGenero(@Param('id') id: string, @Body('pagina') pagina: number) {
+        if (!id)
             throw new BadRequestException("Envie um id de genero para buscar")
-        return await this.tmdbService.filmesPorGenero(id);
+        return await this.tmdbService.filmesPorGenero(id, pagina);
     }
 }

@@ -1,1 +1,43 @@
 <app-navbar></app-navbar>
+<mat-tab-group (selectedTabChange)="tabClick($event)">
+  <mat-tab label="Filmes sugeridos">
+    <ng-template matTabContent>
+
+      <h2 *ngIf="filmesSugeridos?.length <= 0" class="col-md-8" style="margin-left: 17%;">Nada Aqui!</h2>
+      <mat-selection-list #sugeridos [multiple]="false">
+        <mat-list-option *ngFor="let filme of filmesSugeridos" [value]="filme" class="col-md-8"
+          style="margin-left: 17%;" (click)="infoFilme(filme)">
+          <img matListAvatar *ngIf="filme?.poster_path" [src]="'http://image.tmdb.org/t/p/w500/' + filme?.poster_path"
+            [alt]="'Poster do filme ' + filme.title">
+          {{filme.title || filme.original_title}}
+          <mat-divider></mat-divider>
+        </mat-list-option>
+      </mat-selection-list>
+      <mat-paginator *ngIf="filmesSugeridos?.length > 0" [length]="totalSizeSugeridos" [pageSize]="20"
+        (page)="paginarSugeridos($event)">
+      </mat-paginator>
+    </ng-template>
+  </mat-tab>
+  <mat-tab *ngFor="let categoria of categorias" [label]="categoria.name" [value]="categoria.id">
+    <ng-template matTabContent>
+      <h2 *ngIf="filmes[categoria.id]?.length <= 0" class="col-md-8" style="margin-left: 17%;">Nada Aqui!</h2>
+      <mat-selection-list [multiple]="false">
+
+        <mat-list-option *ngFor="let filme of filmes[categoria.id]" class="col-md-8" style="margin-left: 17%;"
+          (click)="infoFilme(filme)">
+          <img matListAvatar *ngIf="filme?.poster_path" [src]="'http://image.tmdb.org/t/p/w500/' + filme?.poster_path"
+            [alt]="'Poster do filme ' + filme.title">
+          <h3 matLine> {{filme.title || filme.original_title}} </h3>
+          <p matLine>
+            <span> {{filme.overview}} </span>
+          </p>
+        </mat-list-option>
+      </mat-selection-list>
+      <mat-paginator *ngIf="filmes[categoria.id]?.length > 0" [length]="totalSize[categoria.id]" [pageSize]="20"
+        (page)="paginarCategoria($event, categoria)">
+      </mat-paginator>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+<ngx-spinner bdColor="rgba(255,255,255,0.8)" size="large" color="#000000" type="fire" [fullScreen]="true"></ngx-spinner>
