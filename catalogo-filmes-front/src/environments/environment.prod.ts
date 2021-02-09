@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backEndUrl: "http://localhost:3000/"
+  backEndUrl: "https://catalogodefilmesapi.herokuapp.com/"
 };
