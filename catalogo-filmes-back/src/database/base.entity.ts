@@ -4,10 +4,4 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 export class Base {
   @PrimaryGeneratedColumn()
   id: number;
-  
-  @CreateDateColumn()
-  created_at: Date;
-
-  @CreateDateColumn()
-  updated_at: Date;
 }
